@@ -4,6 +4,7 @@ import br.com.yagoananias.animeapinew.model.Anime;
 import br.com.yagoananias.animeapinew.repository.AnimeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,5 +34,10 @@ public class AnimeResource {
 
         List<Anime> listaAnimes = animeRepository.findAll();
         return ResponseEntity.ok().body(listaAnimes);
+    }
+
+    @PostMapping
+    public Anime add(@Validated @RequestBody Anime anime) {
+        return animeRepository.save(anime);
     }
 }
